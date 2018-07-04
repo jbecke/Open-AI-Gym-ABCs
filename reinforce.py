@@ -38,10 +38,7 @@ def select_action(state):
     probs = policy(state)
     m = Categorical(probs)
     # Take action according to probability of the outputs
-    if (random.random() < epsilon): # with probability epsilon
-        action = torch.tensor([random.randint(0, len(probs) - 1)])
-    else: 
-        action = m.sample()
+    action = m.sample()
     # Take the log of the probability of the selected action
     policy.saved_log_probs.append(m.log_prob(action))
     return action.item() # convert to int
